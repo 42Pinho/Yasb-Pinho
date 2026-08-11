@@ -57,7 +57,7 @@ O widget de clima desta configuração depende de uma chave da **WeatherAPI** de
 
 Para configurar corretamente:
 
-1. Acesse [weatherapi.com](https://www.weatherapi.com/). 
+1. Acesse [WeatherAPI] https://www.weatherapi.com/ (abra com Ctrl+clique para nova aba). 
 2. Crie uma conta gratuita no serviço.
 3. Gere sua API key gratuita no painel da plataforma.
 4. Substitua o valor de `WEATHERAPIKEY` no arquivo `.env` pela sua chave real.
