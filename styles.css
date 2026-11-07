@@ -51,6 +51,9 @@ A organização segue esta hierarquia:
   --border-2: rgba(255, 255, 255, 0.14);
   --overlay: rgba(0, 0, 0, 0.22);
   --overlay-strong: rgba(0, 0, 0, 0.38);
+  /* Fundo dos popups/menus (cpu, gpu, memória, clima, quick launch...).
+     Último valor = opacidade: 1 = sólido, 0.85 = levemente translúcido. */
+  --popup-bg: rgba(25, 25, 25, 0.95);
 
   /* Tipografia */
   --font-ui: "Segoe UI";
@@ -81,6 +84,7 @@ A organização segue esta hierarquia:
 
   /* Sombra e transição */
   --shadow-popup: 0 10px 35px rgba(0, 0, 0, 0.35);
+  --shadow-text: 1px 1px 3px black;
   --transition-fast: 120ms ease;
   --transition-mid: 180ms ease;
 }
@@ -246,8 +250,9 @@ QWidget {
 .launchpad .launchpad-container,
 .copilot-menu,
 .komorebi-layout-menu,
-.komorebi-control-menu {
-  background-color: color-mix(in srgb, var(--bg-color1) 72%, transparent);
+.komorebi-control-menu,
+.quick-launch-popup .container {
+  background-color: var(--popup-bg);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-12);
   box-shadow: var(--shadow-popup);
@@ -2787,12 +2792,12 @@ QWidget {
 .disk-group {
   border: 1px solid color-mix(in srgb, var(--text1) 10%, transparent);
   border-radius: 12px;
-  background-color: color-mix(in srgb, var(--bg-color1) 40%, transparent);
+  background-color: var(--popup-bg);
 }
 
 .disk-group-row {
-  min-width: 220px;
-  max-width: 220px;
+  min-width: 280px;
+  max-width: 280px;
   max-height: 40px;
   margin: 0;
   padding: 0;
@@ -2807,13 +2812,14 @@ QWidget {
 
 .disk-group-label-bar {
   max-height: 8px;
+  border: none;
   border-radius: 4px;
-  background-color: color-mix(in srgb, var(--blue) 10%, transparent);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .disk-group-label-bar::chunk {
   border-radius: 4px;
-  background-color: color-mix(in srgb, var(--blue) 30%, transparent);
+  background-color: var(--blue);
 }
 
 .disk-group-label {
@@ -2880,7 +2886,7 @@ QWidget {
 
 .weather-card {
   border-radius: 12px;
-  background-color: color-mix(in srgb, var(--bg-color1) 50%, transparent);
+  background-color: var(--popup-bg);
 }
 
 .weather-card-today,
@@ -2973,16 +2979,38 @@ QWidget {
   max-width: 24px;
   min-height: 24px;
   max-height: 24px;
+  margin-right: 4px;
   border: 1px solid transparent;
   border-radius: var(--radius-4);
-  color: color-mix(in srgb, var(--text1) 30%, transparent);
+  background-color: transparent;
+  color: var(--text4);
   font-size: 14px;
 }
 
-.weather-card .hourly-data-button.active {
-  border-color: color-mix(in srgb, var(--text1) 10%, transparent);
-  background-color: color-mix(in srgb, var(--text1) 10%, transparent);
-  color: var(--text1);
+.weather-card .hourly-data-button:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--text2);
+}
+
+/* Botão selecionado: fundo azul + borda + ícone branco.
+   A largura maior é proposital: o YASB não redesenha os botões ao trocar
+   a classe .active; mudar o tamanho força o layout a redesenhá-los. */
+.weather-card .hourly-data-button.active,
+.weather-card .hourly-data-button.active:hover {
+  min-width: 40px;
+  max-width: 40px;
+  border: 1px solid var(--blue);
+  background-color: rgba(136, 184, 255, 0.25);
+  color: var(--white);
+}
+
+/* Botão com ícone vazio (neve, via snow_icon: "" no config) fica oculto */
+.weather-card .hourly-data-button[text=""] {
+  min-width: 0;
+  max-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 /* ===========================================================================
@@ -3281,4 +3309,37 @@ QWidget {
   color: var(--white);
   font-size: 16px;
   font-weight: 600;
+}
+
+/* ===========================================================================
+   24. SOMBRAS E ESPAÇAMENTOS (migrados do config.yaml)
+   ---------------------------------------------------------------------------
+   Substituem as opções depreciadas label_shadow, container_shadow e
+   container_padding. Ao ativar um widget novo que tinha label_shadow no
+   config, adicione o seletor dele aqui.
+   =========================================================================== */
+.home-widget .label,
+.home-widget .icon,
+.apps-widget .label,
+.weather-widget .label,
+.weather-widget .icon,
+.traffic-widget .label,
+.traffic-widget .icon,
+.disk-widget .label,
+.cpu-widget .label,
+.cpu-widget .icon,
+.memory-widget .label,
+.memory-widget .icon,
+.volume-widget .label,
+.volume-widget .icon,
+.power-menu-widget .label {
+  text-shadow: var(--shadow-text);
+}
+
+.media-widget .widget-container {
+  box-shadow: 1px 1px 3px black;
+}
+
+.apps-widget .widget-container {
+  padding: 0 8px;
 }

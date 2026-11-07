@@ -28,12 +28,11 @@ bars:
     # --- POSICIONAMENTO ---
     alignment:
       position: "top"   # Posições: "top", "bottom"
-      center: false     # true = centraliza conteúdo, false = distribui nas 3 áreas
+      align: "center"   # Alinhamento horizontal da barra: "left", "center", "right"
 
     # --- EFEITOS VISUAIS (Windows 11) ---
     blur_effect:
       enabled: false     # Ativa efeito de desfoque na barra
-      acrylic: true      # Efeito acrílico (translúcido)
       dark_mode: false   # Adiciona mais sombra ao desfoque
       round_corners: false  # Cantos arredondados
       border_color: System  # Opções: "System", "None", ou cor HEX (#RRGGBB)
@@ -126,7 +125,6 @@ bars:
       auto_hide: false # Ativa o recurso de auto-ocultar a barra (aparece ao mover o mouse para a borda da tela)
     blur_effect:
       enabled: false
-      acrylic: true
       dark_mode: false
       round_corners: false
       round_corners_type: normal
@@ -178,22 +176,13 @@ widgets:
     type: "yasb.applications.ApplicationsWidget"
     options:
       label: "{data}"
-      container_padding:
-        top: 0
-        left: 8
-        bottom: 0
-        right: 8
+      # Espaçamento e sombra definidos no styles.css (seção 24)
       app_list:  # Lista de atalhos
         # Formato: {icon: "ícone", launch: "comando ou ação"}
         # Ações especiais: "quick_settings", "notification_center", "search", "widget", "launcher"
         - {icon: "\udb82\ude1c", launch: "C:/Program Files/Blackmagic Design/DaVinci Resolve/Resolve.exe"}  # Da vinci Resolve
         - {icon: "\uf4e5", launch: "C:/Users/Pinho/AppData/Local/Programs/crushee-desktop/Crushee.exe"}  # Crushee
         - {icon: "\uf1b6", launch: "C:/Program Files (x86)/Steam/steam.exe"}  # Steam
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
 
   # --- BATTERY WIDGET ---
   # Indicador de bateria para notebooks
@@ -349,7 +338,7 @@ widgets:
         border_color: 'System'
         alignment: 'center'
         direction: 'down'
-        distance: 6
+        offset_top: 6
         show_holidays: true      # Mostra feriados
         show_week_numbers: true   # Mostra número da semana
         country_code: "BR"        # Código do país para feriados
@@ -359,16 +348,6 @@ widgets:
         on_left: "toggle_calendar"
         on_middle: "next_timezone"
         on_right: "toggle_label"
-      container_padding:
-        top: 0
-        left: 0
-        bottom: 0
-        right: 0
-      label_shadow:
-        enabled: false
-        color: "black"
-        radius: 3
-        offset: [1, 1]
 
   # --- COPILOT WIDGET ---
   # Monitor de uso do GitHub Copilot
@@ -430,11 +409,6 @@ widgets:
         on_left: "toggle_menu" # Exibe menu com detalhes da CPU
         on_right: "toggle_label" # Alterna entre label principal e alternativo
         on_middle: "exec cmd /c Taskmgr" # Abre o Gerenciador de Tarefas do Windows
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
       menu:
         enabled: true # Habilita menu popup com gráfico de uso detalhado
         show_graph: true # Exibe gráfico de uso da CPU
@@ -464,11 +438,6 @@ widgets:
         on_left: "toggle_group" # Exibe o menu de discos
         on_middle: "toggle_label" # Alterna rótulo
         on_right: "exec explorer C:\\"  # Abre o Explorer na unidade C:
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
       disk_thresholds:
         low: 25
         medium: 50
@@ -482,7 +451,7 @@ widgets:
       label: "<span>\uF473</span>"
       label_alt: "<span>\uF473</span>"
       group_label:
-        volume_labels: ["C", "D", "E", "F", "G "]
+        volume_labels: ["C", "D", "E", "F", "G"]
         show_label_name: true
         blur: true
         round_corners: true
@@ -641,11 +610,6 @@ widgets:
         system: "Configura\xE7\xF5es"  # Texto das configurações
         about: "Sobre o PC"                 # Texto do sobre
         task_manager: "Gerenciador"    # Texto do gerenciador de tarefas
-      label_shadow:
-        enabled: true    # Ativa sombra no ícone da barra
-        color: "black"   # Cor da sombra
-        radius: 3        # Raio do desfoque
-        offset: [1, 1]   # Deslocamento [x, y] em pixels
 
   # --- IP INFO WIDGET ---
   # Mostra informações de IP e localização via API
@@ -945,16 +909,7 @@ widgets:
       progress_bar:
         enabled: false       # Mostra barra de progresso da música
         alignment: "bottom"  # Alinhamento da barra: "top", "bottom" ou "center"
-      container_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-      label_shadow:
-        enabled: false
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+      # Sombra do container definida no styles.css (seção 24)
 
   # --- MEMORY WIDGET ---
   # Monitor de uso de memória RAM
@@ -982,11 +937,6 @@ widgets:
         - "\u2586" # 60%
         - "\u2587" # 70%
         - "\u2588" # 80%+
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
       menu:
         enabled: true
         show_graph: true
@@ -1246,11 +1196,6 @@ widgets:
         #lock: ["\uEA75", "Lock"]  # Botão Bloquear sessão
         cancel: ["\uDB81\uDF3A", "Cancel"]  # Botão Cancelar/fechar o menu
 
-      label_shadow:  # Configuração da sombra aplicada ao ícone principal do widget
-        enabled: true  # Ativa ou desativa a sombra do ícone
-        color: "black"  # Cor da sombra
-        radius: 3  # Intensidade/espalhamento da sombra
-        offset: [1, 1]    # Deslocamento da sombra no eixo X e Y
 
   # --- POWER PLAN WIDGET ---
   # Mostra e altera o plano de energia do Windows
@@ -1320,7 +1265,7 @@ widgets:
           priority: 3
         bookmarks:
           enabled: true       # Favoritos do navegador
-          prefix: "*"         # Ex: "* github"
+          prefix: "bm"        # Ex: "bm github"
           priority: 4
           browser: "all"      # Navegador: "all", "chrome", "firefox", "edge"
           profile: "Default"  # Perfil do navegador
@@ -1580,11 +1525,6 @@ widgets:
       callbacks:
         on_left: "toggle_menu"
         on_right: "toggle_label"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
 
   # --- UPDATE CHECK WIDGET ---
   # Verificador de atualizações (Windows Update e Winget)
@@ -1615,12 +1555,12 @@ widgets:
       # Variáveis: {icon}, {level}, {volume}
       label: "<span>{icon}</span> {level}"
       label_alt: "{volume}"
-      volume_icons:  # Ícones para cada nível de volume
-        - "\uEEE8"  # Mudo
-        - "\uF026"  # 0-10%
-        - "\uF027"  # 11-30%
-        - "\uF027"  # 31-60%
-        - "\uF028"  # 61-100%  
+      icons:  # Ícones por nível: usa a primeira chave >= volume atual
+        muted: "\uEEE8"  # Mudo
+        "10": "\uF026"   # 0-10%
+        "30": "\uF027"   # 11-30%
+        "60": "\uF027"   # 31-60%
+        "100": "\uF028"  # 61-100%
       audio_menu:
         blur: true
         round_corners: true
@@ -1640,12 +1580,7 @@ widgets:
       callbacks:
         on_left: "toggle_volume_menu"
         on_middle: "do_nothing"
-        on_right: "toggle_mute"   # Abre as configurações de som do Windows
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+        on_right: "toggle_mute"   # Liga/desliga o mudo
 
 
   # --- WALLPAPERS WIDGET ---
@@ -1749,20 +1684,15 @@ widgets:
           default_view: "temperature"  # "temperature", "rain", "snow"
           temperature_icon: "\uDB81\uDD99"
           rain_icon: "\uDB81\uDD96"
-          snow_icon: "\uDB81\uDD98"
+          snow_icon: ""   # Vazio = botão de neve oculto (ver styles.css, seção do clima)
         weather_animation:  # Animações de clima
           enabled: true
-          snow_overrides_rain: true  # Neve sobrepõe chuva
-          temp_line_animation_style: both  # "rain", "snow", "both", "none"
+          snow_overrides_rain: false  # Neve sobrepõe chuva
+          temp_line_animation_style: rain  # "rain", "snow", "both", "none"
           rain_effect_intensity: 1.0  # 0.01 - 10.0
           snow_effect_intensity: 1.0  # 0.01 - 10.0
           scale_with_chance: true     # Escala com % de precipitação
           enable_debug: false
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
 
   # --- WIFI WIDGET ---
   # Status e controle de conexão WiFi
@@ -1925,10 +1855,15 @@ widgets:
 #
 # VARIÁVEIS DE AMBIENTE (.env):
 # - Use variáveis de ambiente para armazenar dados sensíveis como chaves de API, endereços, senhas, etc.
-# - Crie um arquivo chamado ".env" na pasta raiz raiz do YASB (.config\yasb\)
-# - no arquivo .env, defina as variáveis no formato "VARIAVEL=valor" (sem aspas), uma por linha.
+# - O arquivo ".env" fica nesta mesma pasta (.config\yasb\.env) — o nome precisa ser exatamente ".env"
+# - Defina as variáveis no formato "VARIAVEL=valor" (sem aspas), uma por linha.
 # - Use no config: "$env:VARIAVEL" quando precisar referenciar a variável
-# - Reinicie YASB após modificar
+# - Reinicie o YASB após modificar (o .env só é lido na inicialização)
+#
+# SOMBRAS:
+# - label_shadow / container_shadow / container_padding estão depreciados.
+# - Use CSS no styles.css (text-shadow, box-shadow, padding) — veja a seção 24.
+# - Ao ativar um widget que ainda tenha label_shadow, remova o bloco e adicione o seletor na seção 24.
 #
 # DICAS:
 # 1. Teste mudanças salvando o arquivo aos poucos

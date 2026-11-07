@@ -1,0 +1,16 @@
+# Dados pessoais: chaves de API, senhas e caminhos. Nunca publicar.
+.env
+*.env
+!.env.example
+
+# Arquivos gerados pelo YASB durante o uso
+yasb.log
+yasb.log.*
+yasb_colors.css
+
+# Backups locais
+backup/
+
+# Lixo do sistema
+Thumbs.db
+desktop.ini
