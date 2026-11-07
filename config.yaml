@@ -69,6 +69,7 @@ bars:
           #"komorebi_active_layout",    # Layout ativo do Komorebi
           #"active_window",             # Título da janela ativa
           "media",                      # Controles de mídia (reprodução, volume, etc)
+          "audio_visualizer",           # Visualizador de áudio nativo (some no silêncio)
           "apps",                       # Atalhos personalizados para aplicativos e ações do sistema
         ] 
       center: # Widgets centralizados
@@ -84,6 +85,7 @@ bars:
         ]
       right:  # Widgets alinhados à direita
         [
+          "claude_usage",           # Uso dos limites do Claude Code
           "traffic",                # Monitor de tráfego de rede
           "disk",                   # Monitor de uso de disco
           "cpu",                   # Monitor de uso da CPU
@@ -91,6 +93,7 @@ bars:
           "gpu",                   # Monitor de uso da GPU
           #"bluetooth",             # Status e controle Bluetooth
           "volume",                # Controle de volume
+          "control_center",        # Central de controle (Não perturbe, modo escuro, captura, sliders)
           #"whkd",                  # Atalhos de teclado ativos
           #"notifications",         # Central de notificações
           "power_menu",            # Menu de energia
@@ -183,6 +186,22 @@ widgets:
         - {icon: "\udb82\ude1c", launch: "C:/Program Files/Blackmagic Design/DaVinci Resolve/Resolve.exe"}  # Da vinci Resolve
         - {icon: "\uf4e5", launch: "C:/Users/Pinho/AppData/Local/Programs/crushee-desktop/Crushee.exe"}  # Crushee
         - {icon: "\uf1b6", launch: "C:/Program Files (x86)/Steam/steam.exe"}  # Steam
+
+  # --- AUDIO VISUALIZER WIDGET ---
+  # Visualizador de áudio nativo (WASAPI), sem depender do Cava. Cor no styles.css (seção 26).
+  audio_visualizer:
+    type: "yasb.audio_visualizer.AudioVisualizerWidget"
+    options:
+      style: "bars"          # "bars", "waves" ou "dots"
+      height: 14             # Altura em px (4-64)
+      hide_idle: true        # Recolhe quando não há áudio
+      hide_idle_after: 2000  # ms de silêncio antes de recolher
+      smoothness: 55         # 0-100 (maior = mais suave)
+      sensitivity: 50        # 0-100
+      bars:
+        count: 16            # Número de barras
+        width: 2             # Largura de cada barra (px)
+        gap: 2               # Espaço entre barras (px)
 
   # --- BATTERY WIDGET ---
   # Indicador de bateria para notebooks
@@ -302,6 +321,31 @@ widgets:
       framerate: 60           # Taxa de atualização (FPS)
       hide_empty: true        # Oculta quando não há áudio
 
+  # --- CLAUDE USAGE WIDGET ---
+  # Uso dos limites do Claude Code (janelas de 5 horas e 7 dias). Lê o login local do Claude Code.
+  claude_usage:
+    type: "yasb.claude_usage.ClaudeUsageWidget"
+    options:
+      # Variáveis: {five_hour}, {seven_day}, {five_hour_reset}, {seven_day_reset}, {stale}
+      label: "<span>\uDB81\uDE74</span> {five_hour}%"
+      label_alt: "<span>\uDB81\uDE74</span> 7d {seven_day}%"
+      update_interval: 60              # Segundos (30-3600)
+      five_hour_reset_format: "relative"
+      seven_day_reset_format: "absolute"
+      tooltip: true
+      callbacks:
+        on_left: "toggle_menu"         # Abre o popup com as barras de uso
+        on_right: "toggle_label"       # Alterna entre 5h e 7 dias
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+
   # --- CLOCK WIDGET ---
   # Relógio com calendário, fusos horários e alarmes
   clock:
@@ -348,6 +392,56 @@ widgets:
         on_left: "toggle_calendar"
         on_middle: "next_timezone"
         on_right: "toggle_label"
+
+  # --- CONTROL CENTER WIDGET ---
+  # Central de controle estilo Windows 11. Ícones das ações/sliders usam a fonte Segoe Fluent Icons.
+  control_center:
+    type: "yasb.control_center.ControlCenterWidget"
+    options:
+      label: "<span>\uDB85\uDD42</span>"
+      tooltip: true
+      sections_order: ["quick_actions", "sliders", "power", "media"]  # system_controls omitido (o power_menu já cobre)
+      sections:
+        quick_actions:
+          show: true
+          columns: 3
+          label_position: "default"   # "default" (ícone acima) ou "inline" (ao lado)
+          actions:
+            - {id: "toggle_dnd", label: "N\xE3o perturbe", icon: "\uf285"}
+            - {id: "toggle_theme", label: "Modo escuro", icon: "\ue708"}
+            - {id: "screenshot", label: "Captura", icon: "\ue91b"}
+            - {id: "toggle_mute", label: "Mudo", icon: "\ue74f"}
+            - {id: "toggle_mic_mute", label: "Microfone", icon: "\uf12e"}
+        sliders:
+          show: true
+          brightness:
+            icon: "\ue706"
+            show_slider: false        # Desktop: brilho não se aplica
+          volume:
+            icon: "\ue767"
+            show_slider: true
+            show_source_selector: true
+          microphone:
+            icon: "\ue720"
+            show_slider: true
+            show_source_selector: true
+        power:
+          show: true
+          power_plan_title: "Plano de energia"
+          power_mode_title: "Modo de energia"
+        media:
+          show: true
+      popup:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+      callbacks:
+        on_left: "toggle_menu"
 
   # --- COPILOT WIDGET ---
   # Monitor de uso do GitHub Copilot
@@ -516,8 +610,8 @@ widgets:
   gpu:
     type: "yasb.gpu.GpuWidget"
     options:
-      label: "<span>\uF4BC</span> {info[utilization]}%"
-      label_alt: "<span>\uF4BC</span> {info[temp]}\xB0C"
+      label: "<span>\uDB82\uDCAE</span> {info[utilization]}%"
+      label_alt: "<span>\uDB82\uDCAE</span> {info[temp]}\xB0C"
       update_interval: 2000
       gpu_thresholds:
         low: 25
@@ -916,8 +1010,8 @@ widgets:
   memory:
     type: "yasb.memory.MemoryWidget"
     options:
-      label: "<span>\uF4BC</span> {virtual_mem_free}/{virtual_mem_total}"
-      label_alt: "<span>\uF4BC</span> VIRT: {virtual_mem_percent}% SWAP: {swap_mem_percent}%"
+      label: "<span>\uEFC5</span> {virtual_mem_free}/{virtual_mem_total}"
+      label_alt: "<span>\uEFC5</span> VIRT: {virtual_mem_percent}% SWAP: {swap_mem_percent}%"
       update_interval: 5000
       callbacks:
         on_left: "toggle_menu"
@@ -1189,12 +1283,12 @@ widgets:
       button_row: 3 # Quantidade de botões por linha (mínimo 1, máximo 6)
 
       buttons:  # Definição dos botões que aparecem no menu
-        restart: ["\uEAD2", "Restart"]  # Botão Reiniciar (ícone + texto)
-        shutdown: ["\uF011", "Shut Down"]  # Botão Desligar
+        restart: ["\uEAD2", "Reiniciar"]  # Botão Reiniciar (ícone + texto)
+        shutdown: ["\uF011", "Desligar"]  # Botão Desligar
         #signout: ["\uDB80\uDF43", "Sign out"]  # Botão Sair da conta (logoff)
         #hibernate: ["\uF28E", "Hibernate"]  # Botão Hibernar
         #lock: ["\uEA75", "Lock"]  # Botão Bloquear sessão
-        cancel: ["\uDB81\uDF3A", "Cancel"]  # Botão Cancelar/fechar o menu
+        cancel: ["\uDB81\uDF3A", "Cancelar"]  # Botão Cancelar/fechar o menu
 
 
   # --- POWER PLAN WIDGET ---

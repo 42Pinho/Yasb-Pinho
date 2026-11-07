@@ -134,7 +134,7 @@ QWidget {
    4. FEEDBACK GLOBAL
    =========================================================================== */
 .tooltip {
-  background-color: color-mix(in srgb, var(--bg-color1) 88%, transparent);
+  background-color: rgba(25, 25, 25, 0.88);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-6);
   color: var(--text1);
@@ -147,7 +147,7 @@ QWidget {
 
 .context-menu,
 .context-menu .menu-checkbox {
-  background-color: color-mix(in srgb, var(--bg-color1) 92%, transparent);
+  background-color: rgba(25, 25, 25, 0.92);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-8);
   padding: 4px 0;
@@ -226,7 +226,6 @@ QWidget {
 /* ===========================================================================
    5. COMPONENTES COMPARTILHADOS
    =========================================================================== */
-.ai-chat-popup,
 .cpu-popup,
 .gpu-popup,
 .memory-popup,
@@ -251,7 +250,9 @@ QWidget {
 .copilot-menu,
 .komorebi-layout-menu,
 .komorebi-control-menu,
-.quick-launch-popup .container {
+.quick-launch-popup .container,
+.control-center-menu,
+.claude-usage-menu {
   background-color: var(--popup-bg);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-12);
@@ -260,9 +261,7 @@ QWidget {
 
 .header,
 .footer,
-.notes-header,
-.chat-header,
-.chat-footer {
+.notes-header {
   font-family: var(--font-ui);
 }
 
@@ -356,7 +355,7 @@ QWidget {
 }
 
 .notification-widget .widget-container {
-  background-color: color-mix(in srgb, var(--bg-color1) 75%, transparent);
+  background-color: rgba(25, 25, 25, 0.75);
   margin: 3px 0;
   border-radius: 13px;
 }
@@ -573,19 +572,19 @@ QWidget {
 }
 
 .taskbar-widget .app-container.foreground {
-  background-color: color-mix(in srgb, var(--text1) 10%, transparent);
+  background-color: rgba(216, 219, 227, 0.1);
 }
 
 .taskbar-widget .app-container.flashing {
-  background-color: color-mix(in srgb, var(--red) 60%, transparent);
+  background-color: rgba(243, 139, 168, 0.6);
 }
 
 .taskbar-widget .app-container.running {
-  background-color: color-mix(in srgb, var(--text1) 25%, transparent);
+  background-color: rgba(216, 219, 227, 0.25);
 }
 
 .taskbar-widget .app-container:hover {
-  background-color: color-mix(in srgb, var(--text1) 15%, transparent);
+  background-color: rgba(216, 219, 227, 0.15);
 }
 
 .taskbar-widget .app-container .app-title {
@@ -599,7 +598,7 @@ QWidget {
 }
 
 .taskbar-preview.flashing {
-  background-color: color-mix(in srgb, var(--red) 50%, var(--bg-color2));
+  background-color: rgb(140, 88, 106);
 }
 
 .taskbar-preview .header {
@@ -669,7 +668,7 @@ QWidget {
 .systray .unpinned-container,
 .systeminfo-grouper .container,
 .glazewm-grouper .container {
-  background: color-mix(in srgb, var(--bg-color2) 80%, transparent);
+  background: rgba(37, 38, 43, 0.8);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-12);
 }
@@ -680,7 +679,7 @@ QWidget {
 }
 
 .systray .button:hover {
-  background: color-mix(in srgb, var(--text1) 20%, transparent);
+  background: rgba(216, 219, 227, 0.2);
 }
 
 .systray .button[dragging=true] {
@@ -695,11 +694,11 @@ QWidget {
 }
 
 .systray .unpinned-visibility-btn:checked {
-  background: color-mix(in srgb, var(--bg-color2) 80%, transparent);
+  background: rgba(37, 38, 43, 0.8);
 }
 
 .systray .unpinned-visibility-btn:hover {
-  border: 1px solid color-mix(in srgb, var(--text1) 40%, transparent);
+  border: 1px solid rgba(216, 219, 227, 0.4);
 }
 
 .systeminfo-grouper .grouper-button,
@@ -805,11 +804,11 @@ QWidget {
 
 .media-menu .btn.play {
   font-size: 20px;
-  background-color: color-mix(in srgb, var(--text1) 10%, transparent);
+  background-color: rgba(216, 219, 227, 0.1);
 }
 
 .media-menu .btn:hover {
-  background-color: color-mix(in srgb, var(--text1) 10%, transparent);
+  background-color: rgba(216, 219, 227, 0.1);
 }
 
 .media-menu .playback-time {
@@ -829,12 +828,12 @@ QWidget {
 .media-menu .progress-slider::groove {
   height: 2px;
   border-radius: 3px;
-  background: color-mix(in srgb, var(--text1) 10%, transparent);
+  background: rgba(216, 219, 227, 0.1);
 }
 
 .media-menu .progress-slider::groove:hover {
   height: 6px;
-  background: color-mix(in srgb, var(--text1) 20%, transparent);
+  background: rgba(216, 219, 227, 0.2);
 }
 
 .media-menu .progress-slider::sub-page {
@@ -847,13 +846,13 @@ QWidget {
   margin-left: 10px;
   padding: 8px 6px;
   border-radius: 16px;
-  background-color: color-mix(in srgb, var(--text1) 5%, transparent);
+  background-color: rgba(216, 219, 227, 0.05);
 }
 
 .media-menu .app-volume-container .volume-slider::groove {
   width: 2px;
   border-radius: 3px;
-  background: color-mix(in srgb, var(--text1) 10%, transparent);
+  background: rgba(216, 219, 227, 0.1);
 }
 
 .media-menu .app-volume-container .volume-slider::groove:hover {
@@ -867,7 +866,7 @@ QWidget {
 
 .media-menu .app-volume-container .volume-slider::sub-page {
   border-radius: 3px;
-  background: color-mix(in srgb, var(--text1) 10%, transparent);
+  background: rgba(216, 219, 227, 0.1);
 }
 
 .media-menu .app-volume-container .mute-button,
@@ -972,7 +971,7 @@ QWidget {
 .brightness-slider::groove {
   height: 6px;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--bg-color2) 70%, transparent);
+  background: rgba(37, 38, 43, 0.7);
 }
 
 .brightness-slider::handle {
@@ -1412,19 +1411,19 @@ QWidget {
   color: var(--text1);
   font-size: 14px;
   border-bottom: 1px solid var(--border-1);
-  background-color: color-mix(in srgb, var(--bg-color1) 60%, transparent);
+  background-color: rgba(25, 25, 25, 0.6);
 }
 
 .language-menu .footer {
   margin-top: 2px;
   color: var(--text3);
   border-top: 1px solid var(--border-1);
-  background-color: color-mix(in srgb, var(--bg-color1) 60%, transparent);
+  background-color: rgba(25, 25, 25, 0.6);
 }
 
 .language-menu .footer:hover {
   color: var(--text1);
-  background-color: color-mix(in srgb, var(--bg-color2) 60%, transparent);
+  background-color: rgba(37, 38, 43, 0.6);
 }
 
 .language-menu .language-item {
@@ -1434,13 +1433,13 @@ QWidget {
 }
 
 .language-menu .language-item:hover {
-  background-color: color-mix(in srgb, var(--text1) 5%, transparent);
+  background-color: rgba(216, 219, 227, 0.05);
 }
 
 .language-menu .language-item.active,
 .language-menu .language-item.active:hover {
   border-radius: var(--radius-4);
-  background-color: color-mix(in srgb, var(--text1) 10%, transparent);
+  background-color: rgba(216, 219, 227, 0.1);
 }
 
 .language-menu .language-item .code {
@@ -2530,7 +2529,7 @@ QWidget {
 .wifi-menu .header,
 .wifi-menu .footer {
   padding: 12px;
-  background-color: color-mix(in srgb, var(--bg-color1) 60%, transparent);
+  background-color: rgba(25, 25, 25, 0.6);
 }
 
 .wifi-menu .header {
@@ -2552,7 +2551,7 @@ QWidget {
 
 .wifi-menu .wifi-list {
   margin-right: 3px;
-  background-color: color-mix(in srgb, var(--bg-color1) 80%, transparent);
+  background-color: rgba(25, 25, 25, 0.8);
 }
 
 .wifi-menu .wifi-item {
@@ -2564,12 +2563,12 @@ QWidget {
 }
 
 .wifi-menu .wifi-item:hover {
-  background-color: color-mix(in srgb, var(--text1) 5%, transparent);
+  background-color: rgba(216, 219, 227, 0.05);
 }
 
 .wifi-menu .wifi-item[active=true] {
   min-height: 84px;
-  background-color: color-mix(in srgb, var(--text1) 12%, transparent);
+  background-color: rgba(216, 219, 227, 0.12);
 }
 
 .wifi-menu .wifi-item .icon {
@@ -2603,17 +2602,17 @@ QWidget {
   padding: 4px 30px;
   border: none;
   border-radius: var(--radius-4);
-  background-color: color-mix(in srgb, var(--text1) 15%, transparent);
+  background-color: rgba(216, 219, 227, 0.15);
   color: var(--text1);
   font-size: 14px;
 }
 
 .wifi-menu .wifi-item .connect:hover {
-  background-color: color-mix(in srgb, var(--text1) 20%, transparent);
+  background-color: rgba(216, 219, 227, 0.2);
 }
 
 .wifi-menu .wifi-item .connect:pressed {
-  background-color: color-mix(in srgb, var(--text1) 30%, transparent);
+  background-color: rgba(216, 219, 227, 0.3);
 }
 
 .wifi-menu .footer {
@@ -2635,7 +2634,7 @@ QWidget {
 
 .wifi-menu .footer .refresh-icon:hover,
 .wifi-menu .footer .settings-button:hover {
-  background-color: color-mix(in srgb, var(--text1) 10%, transparent);
+  background-color: rgba(216, 219, 227, 0.1);
   border-radius: var(--radius-4);
 }
 
@@ -2790,7 +2789,7 @@ QWidget {
 }
 
 .disk-group {
-  border: 1px solid color-mix(in srgb, var(--text1) 10%, transparent);
+  border: 1px solid rgba(216, 219, 227, 0.1);
   border-radius: 12px;
   background-color: var(--popup-bg);
 }
@@ -2806,8 +2805,8 @@ QWidget {
 }
 
 .disk-group-row:hover {
-  border-color: color-mix(in srgb, var(--text1) 10%, transparent);
-  background-color: color-mix(in srgb, var(--text1) 5%, transparent);
+  border-color: rgba(216, 219, 227, 0.1);
+  background-color: rgba(216, 219, 227, 0.05);
 }
 
 .disk-group-label-bar {
@@ -2835,7 +2834,7 @@ QWidget {
 .wallpapers-gallery-window {
   margin: 16px;
   border: 0;
-  background-color: color-mix(in srgb, var(--mauve) 1%, transparent);
+  background-color: rgba(203, 166, 247, 0.01);
 }
 
 .wallpapers-gallery-buttons {
@@ -2850,7 +2849,7 @@ QWidget {
 }
 
 .wallpapers-gallery-buttons:hover {
-  background-color: color-mix(in srgb, var(--text1) 10%, transparent);
+  background-color: rgba(216, 219, 227, 0.1);
 }
 
 .wallpapers-gallery-image {
@@ -2893,11 +2892,11 @@ QWidget {
 .weather-card-day,
 .weather-card .hourly-container {
   border-radius: 8px;
-  background-color: color-mix(in srgb, var(--bg-color1) 20%, transparent);
+  background-color: rgba(25, 25, 25, 0.2);
 }
 
 .weather-card-today {
-  border: 1px solid color-mix(in srgb, var(--bg-color2) 60%, transparent);
+  border: 1px solid rgba(37, 38, 43, 0.6);
 }
 
 .weather-card-today .label,
@@ -2918,27 +2917,27 @@ QWidget {
 
 .weather-card-today .label.alert {
   padding: 5px 0;
-  border: 1px solid color-mix(in srgb, var(--yellow) 20%, transparent);
+  border: 1px solid rgba(255, 209, 109, 0.2);
   border-radius: 6px;
-  background-color: color-mix(in srgb, var(--yellow) 5%, transparent);
+  background-color: rgba(255, 209, 109, 0.05);
   color: var(--text3);
   font-size: 12px;
   font-weight: 700;
 }
 
 .weather-card-day {
-  border: 1px solid color-mix(in srgb, var(--text3) 40%, transparent);
+  border: 1px solid rgba(147, 153, 173, 0.4);
 }
 
 .weather-card-day.active,
 .weather-card-day:hover {
-  border-color: color-mix(in srgb, var(--bg-color2) 80%, transparent);
-  background-color: color-mix(in srgb, var(--bg-color2) 60%, transparent);
+  border-color: rgba(37, 38, 43, 0.8);
+  background-color: rgba(37, 38, 43, 0.6);
 }
 
 .weather-card .hourly-container {
   min-height: 150px;
-  border: 1px solid color-mix(in srgb, var(--bg-color2) 60%, transparent);
+  border: 1px solid rgba(37, 38, 43, 0.6);
   background-color: var(--bg-color2);
 }
 
@@ -2961,13 +2960,13 @@ QWidget {
 }
 
 .weather-card .hourly-data .hourly-rain-animation {
-  color: color-mix(in srgb, var(--blue) 60%, transparent);
-  background-color: color-mix(in srgb, var(--bg-color1) 10%, transparent);
+  color: rgba(136, 184, 255, 0.6);
+  background-color: rgba(25, 25, 25, 0.1);
 }
 
 .weather-card .hourly-data .hourly-snow-animation {
-  color: color-mix(in srgb, var(--text1) 70%, transparent);
-  background-color: color-mix(in srgb, var(--bg-color1) 10%, transparent);
+  color: rgba(216, 219, 227, 0.7);
+  background-color: rgba(25, 25, 25, 0.1);
 }
 
 .weather-card .hourly-data-buttons {
@@ -3014,227 +3013,12 @@ QWidget {
 }
 
 /* ===========================================================================
-   23. AI CHAT E WHKD
+   23. WHKD
    =========================================================================== */
-.ai-chat-widget {
-  padding: 0 6px;
-}
 
-.ai-chat-widget .icon {
-  color: var(--blue);
-  font-size: 16px;
-}
-
-.ai-chat-popup {
-  min-width: 500px;
-  max-width: 500px;
-  min-height: 600px;
-  max-height: 600px;
-  background-color: rgba(24, 25, 27, 0.8);
-}
-
-.ai-chat-popup.floating {
-  min-width: 900px;
-  max-width: 900px;
-  min-height: 700px;
-  max-height: 700px;
-  background-color: rgba(24, 25, 27, 0.4);
-}
-
-.ai-chat-popup .chat-header,
-.ai-chat-popup .chat-footer {
-  padding: 16px;
-}
-
-.ai-chat-popup .chat-header {
-  background-color: rgba(24, 25, 27, 0.4);
-}
-
-.ai-chat-popup .chat-footer {
-  background-color: transparent;
-}
-
-.ai-chat-popup .chat-header .float-button {
-  padding: 3px 6px;
-  border: none;
-  border-radius: var(--radius-4);
-  background-color: transparent;
-  color: #cfcfcf;
-  font-size: 16px;
-}
-
-.ai-chat-popup .chat-header .float-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.ai-chat-popup.floating .chat-header .float-button,
-.ai-chat-popup .chat-header .provider-label,
-.ai-chat-popup .chat-header .model-label,
-.ai-chat-popup .chat-content .user-message,
-.ai-chat-popup .chat-content .assistant-message,
-.ai-chat-popup .chat-content .empty-chat .greeting,
-.ai-chat-popup .chat-content .empty-chat .message,
-.ai-chat-popup .chat-footer .chat-input,
-.ai-chat-popup .attachment-chip .attachment-label,
 .whkd-popup .edit-config-button,
 .whkd-popup .filter-input {
   color: var(--white);
-}
-
-.ai-chat-popup .chat-header .provider-label,
-.ai-chat-popup .chat-header .model-label {
-  margin-right: 8px;
-  font-family: var(--font-ui);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.ai-chat-popup .chat-header .provider-button,
-.ai-chat-popup .chat-header .model-button {
-  min-width: 130px;
-  max-width: 130px;
-  margin-right: 8px;
-  padding: 4px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  background-color: var(--bg-color2);
-  color: var(--white);
-  font-family: var(--font-ui);
-  font-size: 13px;
-}
-
-.ai-chat-popup .chat-header .provider-button:disabled,
-.ai-chat-popup .chat-header .model-button:disabled {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.ai-chat-popup .context-menu {
-  background-color: var(--bg-color2);
-}
-
-.ai-chat-popup .chat-header .context-menu::item {
-  min-width: 130px;
-  max-width: 130px;
-  padding: 4px;
-}
-
-.ai-chat-popup .context-menu::item:checked {
-  background-color: var(--blue-strong);
-  color: var(--white);
-}
-
-.ai-chat-popup .chat-content {
-  background: transparent;
-  border: none;
-}
-
-.ai-chat-popup .chat-content .empty-chat .greeting {
-  color: rgba(255, 255, 255, 0.8);
-  font-family: var(--font-ui);
-  font-size: 48px;
-  font-weight: 600;
-}
-
-.ai-chat-popup .chat-content .empty-chat .message {
-  padding-top: 8px;
-  color: rgba(255, 255, 255, 0.4);
-  font-family: var(--font-ui);
-  font-size: 24px;
-}
-
-.ai-chat-popup .chat-content .user-message,
-.ai-chat-popup .chat-content .assistant-message {
-  margin: 4px 0;
-  padding: 8px;
-  border-radius: var(--radius-4);
-  font-family: var(--font-ui);
-  font-size: 14px;
-}
-
-.ai-chat-popup .chat-content .user-message {
-  margin-left: 26px;
-}
-
-.ai-chat-popup .chat-content .assistant-message {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(162, 168, 187, 0.1);
-}
-
-.ai-chat-popup .chat-content .assistant-icon {
-  margin-right: 8px;
-  color: #8c8d92;
-  font-family: var(--font-mono);
-  font-size: 24px;
-}
-
-.ai-chat-popup .chat-footer .chat-input {
-  min-height: 28px;
-  max-height: 28px;
-  padding: 0 8px;
-  border: 2px solid var(--border-1);
-  border-radius: var(--radius-4);
-  background-color: rgba(24, 25, 27, 0.6);
-  font-family: var(--font-ui);
-  font-size: 14px;
-}
-
-.ai-chat-popup .chat-footer .chat-input:focus {
-  border-color: var(--blue-strong);
-}
-
-.ai-chat-popup .chat-footer .clear-button,
-.ai-chat-popup .chat-footer .send-button,
-.ai-chat-popup .chat-footer .stop-button,
-.ai-chat-popup .chat-footer .attach-button {
-  min-width: 30px;
-  max-width: 30px;
-  min-height: 30px;
-  max-height: 30px;
-  border: none;
-  border-radius: var(--radius-4);
-  background-color: var(--bg-color3);
-  color: var(--white);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.ai-chat-popup .chat-footer .stop-button {
-  background-color: var(--blue-strong);
-}
-
-.ai-chat-popup .chat-footer .clear-button:hover,
-.ai-chat-popup .chat-footer .send-button:hover,
-.ai-chat-popup .chat-footer .stop-button:hover,
-.ai-chat-popup .chat-footer .attach-button:hover {
-  background-color: #464646;
-}
-
-.ai-chat-popup .chat-footer .clear-button:disabled,
-.ai-chat-popup .chat-footer .send-button:disabled,
-.ai-chat-popup .chat-footer .stop-button:disabled,
-.ai-chat-popup .chat-footer .attach-button:disabled {
-  background-color: var(--bg-color3);
-  color: #818181;
-}
-
-.ai-chat-popup .attachment-chip {
-  min-height: 28px;
-  border: 1px solid #0066ff54;
-  border-radius: 6px;
-  background-color: #0066ff18;
-}
-
-.ai-chat-popup .attachment-chip .attachment-label {
-  padding: 0 4px;
-  font-family: var(--font-ui);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.ai-chat-popup .attachment-chip .attachment-remove-button {
-  border: none;
-  background: transparent;
-  font-size: 12px;
 }
 
 .whkd-widget {
@@ -3332,7 +3116,10 @@ QWidget {
 .memory-widget .icon,
 .volume-widget .label,
 .volume-widget .icon,
-.power-menu-widget .label {
+.power-menu-widget .label,
+.claude-usage .label,
+.claude-usage .icon,
+.control-center-widget .icon {
   text-shadow: var(--shadow-text);
 }
 
@@ -3342,4 +3129,289 @@ QWidget {
 
 .apps-widget .widget-container {
   padding: 0 8px;
+}
+
+
+/* ===========================================================================
+   25. WIDGETS NOVOS: AUDIO VISUALIZER, CLAUDE USAGE, CONTROL CENTER
+   =========================================================================== */
+
+/* --- Audio Visualizer --- */
+.audio-visualizer-widget,
+.audio-visualizer-widget .widget-container {
+  padding: 0 4px;
+  margin: 0;
+}
+
+.audio-visualizer-widget .audio-visualizer-canvas {
+  -qproperty-fillbrush: linear-gradient(to top, var(--blue), var(--lavender));
+}
+
+/* --- Claude Usage: barra --- */
+.claude-usage .icon {
+  color: var(--orange);
+  font-size: 14px;
+}
+
+.claude-usage .label {
+  font-family: var(--font-ui);
+}
+
+.claude-usage .stale {
+  color: var(--text4);
+}
+
+/* --- Claude Usage: popup --- */
+.claude-usage-menu {
+  min-width: 300px;
+  padding: 4px;
+}
+
+.claude-usage-menu .header {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-1);
+}
+
+.claude-usage-menu .header .text {
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-size: 14px;
+}
+
+.claude-usage-menu .header .refresh,
+.claude-usage-menu .header .pin-btn {
+  padding: 4px;
+  border: none;
+  border-radius: var(--radius-4);
+  background: transparent;
+  color: var(--text3);
+  font-family: var(--font-icons);
+  font-weight: 400;
+}
+
+.claude-usage-menu .header .refresh:hover,
+.claude-usage-menu .header .pin-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text1);
+}
+
+.claude-usage-menu .header .pin-btn.pinned {
+  color: var(--blue);
+}
+
+.claude-usage-menu .section {
+  padding: 10px 14px;
+}
+
+.claude-usage-menu .section .title,
+.claude-usage-menu .section .footer .reset,
+.claude-usage-menu .section .footer .percent,
+.claude-usage-menu .section .date,
+.claude-usage-menu .status-row .status-text {
+  font-family: var(--font-ui);
+}
+
+.claude-usage-menu .section .title {
+  color: var(--text2);
+  font-size: 12px;
+}
+
+.claude-usage-menu .section .progress {
+  min-height: 6px;
+  max-height: 6px;
+  margin: 6px 0;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.claude-usage-menu .section .progress .fill {
+  border-radius: 3px;
+  background-color: var(--blue);
+}
+
+.claude-usage-menu .section .progress.low .fill {
+  background-color: var(--green);
+}
+
+.claude-usage-menu .section .progress.medium .fill {
+  background-color: var(--yellow);
+}
+
+.claude-usage-menu .section .progress.high .fill {
+  background-color: var(--red);
+}
+
+.claude-usage-menu .section .footer .reset {
+  color: var(--text3);
+  font-size: 11px;
+}
+
+.claude-usage-menu .section .footer .percent {
+  font-size: 11px;
+}
+
+.claude-usage-menu .section .footer .percent.low {
+  color: var(--green);
+}
+
+.claude-usage-menu .section .footer .percent.medium {
+  color: var(--yellow);
+}
+
+.claude-usage-menu .section .footer .percent.high {
+  color: var(--red);
+}
+
+/* --- Control Center: barra --- */
+.control-center-widget .icon {
+  color: var(--lavender);
+  font-size: 16px;
+}
+
+/* --- Control Center: popup --- */
+.control-center-menu {
+  min-width: 340px;
+  padding: 8px;
+}
+
+/* Ícones das ações, sliders e mídia são glifos da Segoe Fluent Icons */
+.control-center-menu .icon,
+.control-center-menu .section.media .button {
+  font-family: var(--font-icons);
+  font-weight: 400;
+}
+
+.control-center-menu .title,
+.control-center-menu .subtext,
+.control-center-menu .value,
+.control-center-menu .track-info {
+  font-family: var(--font-ui);
+}
+
+.control-center-menu .section {
+  padding: 6px;
+}
+
+.control-center-menu .section.quick-actions .button {
+  min-height: 64px;
+  margin: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-10);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.control-center-menu .section.quick-actions .button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-center-menu .section.quick-actions .button.active {
+  border-color: var(--blue);
+  background-color: rgba(136, 184, 255, 0.25);
+}
+
+.control-center-menu .section.quick-actions .button .icon {
+  color: var(--text1);
+  font-size: 16px;
+}
+
+.control-center-menu .section.quick-actions .button .title {
+  color: var(--text2);
+  font-size: 11px;
+}
+
+.control-center-menu .section.quick-actions .button.active .icon,
+.control-center-menu .section.quick-actions .button.active .title {
+  color: var(--white);
+}
+
+.control-center-menu .section.sliders .slider {
+  padding: 4px 6px;
+}
+
+.control-center-menu .section.sliders .slider .icon {
+  color: var(--text1);
+  font-size: 16px;
+}
+
+.control-center-menu .section.sliders .slider .value {
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.control-center-menu .section.sliders .slider .slider-control::groove {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.control-center-menu .section.sliders .slider .slider-control::sub-page {
+  border-radius: 2px;
+  background: var(--blue);
+}
+
+.control-center-menu .section.sliders .slider .slider-control::handle {
+  width: 14px;
+  height: 14px;
+  margin: -5px 0;
+  border-radius: 7px;
+  background: var(--white);
+}
+
+.control-center-menu .section.sliders .slider .source-selector {
+  border: none;
+  border-radius: var(--radius-4);
+  background: transparent;
+  color: var(--text3);
+}
+
+.control-center-menu .section.sliders .slider .source-selector:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.control-center-menu .section.power .button {
+  margin: 4px;
+  padding: 8px;
+  border-radius: var(--radius-8);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.control-center-menu .section.power .button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-center-menu .section.power .button .title {
+  color: var(--text1);
+  font-size: 12px;
+}
+
+.control-center-menu .section.power .button .subtext {
+  color: var(--text3);
+  font-size: 11px;
+}
+
+.control-center-menu .section.media .title {
+  color: var(--text1);
+  font-size: 13px;
+}
+
+.control-center-menu .section.media .subtext {
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.control-center-menu .section.media .button {
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 16px;
+  background: transparent;
+  color: var(--text1);
+  font-size: 14px;
+}
+
+.control-center-menu .section.media .button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-center-menu .section.media .button.disabled {
+  color: var(--text4);
 }
