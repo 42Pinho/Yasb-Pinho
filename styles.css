@@ -1,13 +1,41 @@
 /*
 ===============================================================================
-YASB CUSTOM THEME
+ YASB PINHO — styles.css
+ https://github.com/42Pinho/Yasb-Pinho
 ===============================================================================
-A organização segue esta hierarquia:
-1. Tokens globais
-2. Base compartilhada
-3. Barra e widgets genéricos
-4. Menus e popups reutilizáveis
-5. Widgets específicos
+
+ COMO MUDAR AS CORES (o jeito mais fácil)
+   Todas as cores ficam na seção 1 (":root"), logo abaixo. Troque o valor
+   hexadecimal e salve — o YASB aplica na hora (watch_stylesheet).
+     --bg-color1 ... fundo da barra
+     --text1 ....... cor principal do texto
+     --blue ........ cor de destaque (ícones, seleção, barras de progresso)
+     --popup-bg .... fundo dos menus que abrem ao clicar. O último número é a
+                     opacidade: 1 = sólido, 0.85 = levemente transparente.
+
+ REGRAS DO MOTOR DE CSS DO YASB (diferente de um navegador)
+   - Funciona: var(--nome), rgba(r, g, b, a), #RRGGBB, #RRGGBBAA, @import,
+     linear-gradient(), text-shadow, box-shadow.
+   - NÃO funciona: color-mix(), calc(), nesting, media queries.
+     Uma propriedade inválida é ignorada em silêncio, sem erro no log.
+     Para transparência, use rgba(): ex. rgba(255, 255, 255, 0.1).
+
+ ÍNDICE
+    1. Tokens globais (cores, fontes, tamanhos)   14. Popups de CPU, GPU e memória
+    2. Base global                                15. Menu inicial e idioma
+    3. Barra principal                            16. Komorebi
+    4. Tooltip e menu de contexto                 17. Launchpad
+    5. Componentes compartilhados (popups)        18. Todo e notas
+    6. Widgets básicos de barra                   19. Menu de energia
+    7. Widgets de status (bateria, CPU, OBS...)   20. Copilot e GitHub
+    8. Barra de tarefas e controles de janela     21. Rede: Wi-Fi e tráfego
+    9. Systray e groupers                         22. Disco, wallpaper e clima
+   10. Menu de mídia                              23. WHKD
+   11. Menus de áudio e microfone                 24. Sombras e espaçamentos
+   12. Menu de brilho                             25. Audio Visualizer, Claude
+   13. Calendário e relógio                           Usage e Control Center
+
+ Dica: use Ctrl+F e procure pelo número da seção (ex.: "22. DISCO").
 ===============================================================================
 */
 
