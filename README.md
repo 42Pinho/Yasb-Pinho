@@ -1,128 +1,181 @@
-# YASB personalizado
+# Yasb-Pinho
 
-Configuração personalizada do **YASB (Yet Another Status Bar)** para Windows, criada para uso diário com foco em produtividade, monitoramento do sistema e acesso rápido a funções importantes do desktop. Esta versão foi montada e ajustada para o meu próprio ambiente, mas está publicada para servir como base de estudo, adaptação e personalização por outras pessoas.
+Minha barra de status para Windows, feita com o [YASB](https://github.com/amnweb/yasb) (*Yet Another Status Bar*).
+Escura, limpa, toda em português, com monitoramento do sistema, mídia, clima e atalhos.
 
-Este projeto utiliza uma barra principal `status-bar`, uma barra de tarefas opcional `yasb-taskbar` e um tema visual reestruturado em `styles.css`, com widgets voltados para clima, mídia, monitoramento de hardware, produtividade e integração com ferramentas externas.
+![Barra completa](docs/img/barra.png)
 
-## Créditos
+> Este guia foi escrito para quem **nunca mexeu com o YASB**. Siga os passos na ordem e a barra vai funcionar.
+> Se algo der errado, veja [Solução de problemas](docs/problemas.md).
 
-Este projeto foi construído com base no repositório do **WINchester**, que serviu como referência estrutural e de organização para o setup. O repositório-base utilizado foi [winchestercanal/Yasb](https://github.com/winchestercanal/Yasb).
+---
 
-A ideia aqui não é replicar exatamente a configuração original, mas sim manter uma versão própria, ajustada para o meu uso, com mudanças em layout, widgets, organização e estilo.
+## O que tem na barra
 
-## Arquivos
+**Lado esquerdo**
 
-Os arquivos principais deste projeto são:
+![Lado esquerdo](docs/img/barra-esquerda.png)
 
-- `config.yaml` — configuração principal da barra, widgets, menus, callbacks e comportamento geral.
-- `styles.css` — tema visual completo, com cores, tipografia, popups, menus e ajustes dos widgets.
-- `.env` ou `file.env` — arquivo de variáveis de ambiente usado para tokens, chaves de API, senhas e caminhos personalizados.
+| | Widget | O que faz |
+|---|---|---|
+| 📂 | **Menu inicial** | Atalhos para as suas pastas, Configurações e Gerenciador de Tarefas |
+| ⏯️ | **Mídia** | Música/vídeo tocando agora, com anterior, play/pause e próxima |
+| 〰️ | **Visualizador de áudio** | Barrinhas que dançam com o som (somem quando está em silêncio) |
+| 🚀 | **Aplicativos** | Botões para abrir seus programas favoritos |
 
-Coloque os arquivos no diretório abaixo:
+**Centro**
 
-```powershell
-%USERPROFILE%\.config\yasb
-```
+![Centro](docs/img/barra-centro.png)
 
-## Recursos
+| | Widget | O que faz |
+|---|---|---|
+| 🕐 | **Relógio** | Data e hora; clique para abrir o calendário com feriados do Brasil |
+| ⛅ | **Clima** | Temperatura atual; clique para ver a previsão hora a hora |
 
-Esta configuração inclui widgets e integrações voltados para uso técnico e produtividade no Windows. Entre os recursos disponíveis estão:
+**Lado direito**
 
-- Relógio com calendário, alarmes e suporte a feriados.
-- Widget de clima com WeatherAPI.
-- Controle de mídia, volume, brilho e Bluetooth.
-- Monitoramento de CPU, GPU, memória, disco e tráfego de rede.
-- Notificações, power menu e janela ativa.
-- Notas rápidas, tarefas e Pomodoro.
-- Launchpad, quicklaunch e atalhos personalizados para apps.
-- Integração com GitHub, GitHub Copilot, OBS e Komorebi.
-- Suporte a WHKD e outros componentes do ambiente de automação.
+![Lado direito](docs/img/barra-direita.png)
 
-## Instalação
+| | Widget | O que faz |
+|---|---|---|
+| ✨ | **Claude Usage** | Uso dos limites do Claude Code (opcional) |
+| 🌐 | **Rede** | Velocidade de download e upload |
+| 💽 | **Disco** | Uso do disco C:; clique para ver todos os discos |
+| 🧠 | **CPU / Memória / GPU** | Uso do processador, da RAM e da placa de vídeo, com gráficos ao clicar |
+| 🔊 | **Volume** | Volume geral e por aplicativo |
+| 🎛️ | **Central de controle** | Não perturbe, modo escuro, captura de tela, áudio e plano de energia |
+| ⏻ | **Energia** | Reiniciar e desligar |
 
-Antes de usar esta configuração, instale o **YASB** e a fonte **JetBrainsMono Nerd Font**, pois ela é necessária para exibir corretamente vários ícones e glyphs usados na barra e em alguns widgets.
+A lista completa, com o que cada widget precisa e como ligar os que vêm desligados, está em [docs/widgets.md](docs/widgets.md).
 
-### 1. Instale o YASB e a fonte necessária
+---
 
-Abra o **PowerShell** ou **Terminal do Windows** e execute:
+## O que você precisa
+
+- **Windows 10 ou 11**
+- **YASB v2.0.7 ou mais novo**
+- **Fonte JetBrainsMono Nerd Font** (desenha os ícones da barra)
+- **Fonte Segoe Fluent Icons**: já vem no Windows 11. No Windows 10, baixe no [site da Microsoft](https://learn.microsoft.com/pt-br/windows/apps/design/style/segoe-fluent-icons-font).
+
+---
+
+## Instalação passo a passo
+
+### 1. Instale o YASB e a fonte
+
+Abra o **PowerShell** (aperte `Win`, digite *PowerShell* e dê Enter), cole o comando abaixo e aperte Enter:
 
 ```powershell
 winget install amn.yasb DEVCOM.JetBrainsMonoNerdFont
 ```
 
-Se preferir, a fonte também pode ser baixada manualmente pelo site oficial da Nerd Fonts:
+Quando terminar, **abra o YASB uma vez** pelo menu Iniciar. Isso cria a pasta de configuração. Ele vai aparecer com o visual padrão, e é normal.
 
-[https://www.nerdfonts.com/font-downloads](https://www.nerdfonts.com/font-downloads)
+### 2. Baixe este projeto
 
-### 2. Copie os arquivos de configuração
+Nesta página, clique no botão verde **Code**, depois em **Download ZIP**. Extraia o ZIP em qualquer lugar (ex.: na Área de Trabalho).
 
-Coloque os arquivos abaixo no diretório:
+### 3. Abra a pasta de configuração do YASB
 
-```powershell
+Aperte `Win + R`, cole o texto abaixo e dê Enter:
+
+```
 %USERPROFILE%\.config\yasb
 ```
 
-Arquivos:
+> 💡 Já existem arquivos aí? Faça uma cópia deles em outro lugar antes de continuar, para poder voltar atrás.
+
+### 4. Copie os arquivos
+
+Da pasta que você extraiu, copie estes três arquivos para a pasta aberta no passo 3, substituindo os que já existem:
+
 - `config.yaml`
 - `styles.css`
-- `.env` (arquivo de exemplo, precisa ser preenchido)
+- `.env.example`
 
-### 3. Configure o monitor onde a barra vai aparecer
+### 5. Renomeie `.env.example` para `.env` ⚠️ *(o passo que mais dá errado)*
 
-Abra o `config.yaml` e ajuste a seção `screens`, porque a barra só será exibida nos monitores informados nessa lista.
+O YASB só lê um arquivo chamado **exatamente** `.env`. Se o nome ficar `env.txt`, `.env.txt` ou `.env.example`, o clima e os atalhos de pasta não funcionam.
 
-Exemplo atual no arquivo:
+1. No Explorador de Arquivos, clique em **Exibir → Mostrar → Extensões de nomes de arquivos**, para ver o nome completo.
+2. Clique com o botão direito em `.env.example` → **Renomear** → apague tudo e escreva `.env`.
+   - Se o Windows reclamar, escreva `.env.` (com um ponto no final): ele remove o ponto sozinho.
 
-```yaml
-screens: ['Acer KG241']
+<details>
+<summary>Prefere fazer pelo PowerShell?</summary>
+
+```powershell
+cd "$env:USERPROFILE\.config\yasb"
+Rename-Item .env.example .env
+```
+</details>
+
+### 6. Recarregue o YASB
+
+No PowerShell:
+
+```powershell
+yasbc reload
 ```
 
-Se o nome do seu monitor for diferente, altere para o nome correto. Sem isso, a barra pode não aparecer no monitor desejado.
+Pronto! A barra nova deve aparecer. Agora faça os ajustes abaixo para ela ficar com a sua cara.
 
-### 4. Preencha o arquivo `.env`
+---
 
-O arquivo `.env` enviado neste projeto é apenas um **modelo de exemplo** e deve ser editado com as suas informações reais.
+## Primeiros ajustes
 
-Nele você pode configurar, por exemplo:
-- Token do GitHub
-- Token do Copilot
-- Senha do OBS WebSocket
-- Caminhos personalizados
-- Chave da WeatherAPI
+Abra os arquivos com qualquer editor de texto (o Bloco de Notas serve; o [VS Code](https://code.visualstudio.com/) é melhor porque colore o código). Ao salvar, o YASB aplica as mudanças na hora.
 
-### 5. Configure a WeatherAPI
+### Clima (o mais importante)
 
-Para o widget de clima funcionar corretamente, crie uma conta gratuita em:
+1. Crie uma conta grátis em [weatherapi.com](https://www.weatherapi.com/) e copie a **API Key** que aparece no painel.
+2. No arquivo `.env`, troque `cole_sua_chave_aqui` pela sua chave:
+   ```
+   WEATHERAPI_KEY=abc123suachaveaqui
+   ```
+3. No `config.yaml`, procure por `location: "Joinville"` e troque pela sua cidade.
+4. Rode `yasbc reload` (o `.env` só é lido quando o YASB inicia).
 
-[https://www.weatherapi.com/](https://www.weatherapi.com/)
+> Não quer criar conta? Use o widget **Open-Meteo**, que não precisa de chave. Veja [docs/widgets.md](docs/widgets.md#clima-sem-chave).
 
-Depois, gere sua API key e adicione o valor no campo `WEATHERAPIKEY` dentro do arquivo `.env`.
+### Seus aplicativos
 
-### 6. Reinicie ou recarregue o YASB
+No `config.yaml`, procure por `app_list:` e troque os caminhos pelos programas instalados no seu PC.
+Para achar o caminho, clique com o botão direito no atalho do programa → **Abrir local do arquivo**.
 
-Após ajustar os arquivos, reinicie o YASB ou recarregue a configuração para aplicar tudo corretamente.
+### Suas pastas
 
-## Personalização
+No `.env`, troque `SeuUsuario` pelo seu nome de usuário do Windows nas linhas `Downloads=` e `Clipes=`.
 
-Esta é uma versão criada e personalizada por mim, pensada primeiro para o meu uso pessoal no Windows. Por isso, várias partes do projeto refletem meu ambiente, meus caminhos locais, minhas integrações e minha organização de widgets.
+### Ligar e desligar widgets
 
-Alguns itens que normalmente precisam ser ajustados antes do uso são:
+No `config.yaml`, em `widgets:` (dentro de `bars:`), cada widget é uma linha. Coloque um `#` no começo para **desligar** ou tire o `#` para **ligar**:
 
-- Nome do monitor na seção `screens`.
-- Caminhos locais de programas e pastas.
-- Tokens de GitHub e Copilot.
-- Senha do OBS WebSocket.
-- Chave da WeatherAPI.
-- Componentes opcionais como Komorebi, WHKD e integrações extras.
+```yaml
+"media",        # ligado
+#"wallpapers",  # desligado
+```
 
-## Observações
+Mais personalizações (cores, ícones, monitor, posição) estão em [docs/personalizacao.md](docs/personalizacao.md).
 
-Esta configuração não foi pensada como pacote universal pronto para qualquer máquina sem ajustes. Ela foi organizada para o meu fluxo de uso e depois disponibilizada publicamente para quem quiser adaptar, estudar ou usar como referência.
+---
 
-O `styles.css` foi reestruturado com foco em legibilidade, manutenção e consistência visual, centralizando tokens globais, componentes compartilhados, menus reutilizáveis e estilos específicos por widget.
+## Documentação
 
-## Base para alterações
+| Guia | Para quê |
+|---|---|
+| [docs/widgets.md](docs/widgets.md) | Todos os widgets: o que fazem, o que precisam, como ativar |
+| [docs/personalizacao.md](docs/personalizacao.md) | Cores, transparência, ícones, monitor, posições |
+| [docs/problemas.md](docs/problemas.md) | Quando algo não funciona |
+| [CHANGELOG.md](CHANGELOG.md) | O que mudou em cada versão |
 
-Você pode usar este projeto como ponto de partida para montar sua própria barra, removendo widgets, alterando menus, trocando cores, reorganizando os blocos e adicionando integrações conforme a sua necessidade.
+---
 
-A proposta é simples: esta é a minha versão pessoal do YASB, publicada como referência aberta para customização.
+## Créditos
+
+- [YASB](https://github.com/amnweb/yasb), por amnweb e contribuidores: o programa que faz tudo funcionar.
+- [WINchester / winchestercanal/Yasb](https://github.com/winchestercanal/Yasb): usado como referência de estrutura na primeira versão.
+
+## Licença
+
+[MIT](LICENSE): use, copie e modifique à vontade, mantendo o aviso de autoria.
