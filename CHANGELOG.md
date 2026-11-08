@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.3 (novembro de 2026)
+
+### Mudado
+- O contador de uso do Claude (`claude_usage`) saiu da direita e foi para o centro da barra, à esquerda do relógio.
+- Atalhos de apps ao lado do player agora são programas que vêm em qualquer Windows: Explorador de Arquivos, Bloco de Notas, Paint e Calculadora. Para usar os seus, troque os itens de `app_list` no widget `apps` pelo caminho do `.exe` de cada programa.
+- `ferramentas/publicar.ps1` troca os atalhos de apps do autor pelos genéricos acima e cancela a publicação se o caminho da pasta de usuário (`C:\Users\<você>`) aparecer nos arquivos.
+- README refeito: novas posições dos widgets, como trocar os atalhos de apps pelos seus programas e como atualizar a partir de uma versão anterior.
+- Prints novos da barra em `docs/img/`.
+
 ## v2.0.2 (novembro de 2026)
 
 ### Atualizado para o YASB v2.0.8

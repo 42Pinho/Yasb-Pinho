@@ -8,6 +8,8 @@ Escura, limpa, toda em português, com monitoramento do sistema, mídia, clima e
 > Este guia foi escrito para quem **nunca mexeu com o YASB**. Siga os passos na ordem e a barra vai funcionar.
 > Se algo der errado, veja [Solução de problemas](docs/problemas.md).
 
+> 🆕 **Novidades da v2.0.3:** o contador do Claude foi para o centro da barra, os atalhos de apps agora vêm com programas que todo Windows tem e o monitor de rede tem largura fixa. Veja o [CHANGELOG](CHANGELOG.md).
+
 ---
 
 ## O que tem na barra
@@ -19,9 +21,9 @@ Escura, limpa, toda em português, com monitoramento do sistema, mídia, clima e
 | | Widget | O que faz |
 |---|---|---|
 | 📂 | **Menu inicial** | Atalhos para as suas pastas, Configurações e Gerenciador de Tarefas |
-| ⏯️ | **Mídia** | Música/vídeo tocando agora, com anterior, play/pause e próxima |
-| 〰️ | **Visualizador de áudio** | Barrinhas que dançam com o som (somem quando está em silêncio) |
-| 🚀 | **Aplicativos** | Botões para abrir seus programas favoritos |
+| ⏯️ | **Mídia** | Música ou vídeo tocando agora, com anterior, play/pause e próxima |
+| 〰️ | **Visualizador de áudio** | Barrinhas que dançam com o som (somem no silêncio) |
+| 🚀 | **Aplicativos** | Atalhos para programas. Vêm com Explorador de Arquivos, Bloco de Notas, Paint e Calculadora; troque pelos seus ([veja como](#seus-aplicativos)) |
 
 **Centro**
 
@@ -29,6 +31,7 @@ Escura, limpa, toda em português, com monitoramento do sistema, mídia, clima e
 
 | | Widget | O que faz |
 |---|---|---|
+| ✨ | **Claude Usage** | Quanto você já usou dos limites do Claude Code; clique para ver os detalhes (opcional) |
 | 🕐 | **Relógio** | Data e hora; clique para abrir o calendário com feriados do Brasil |
 | ⛅ | **Clima** | Temperatura atual; clique para ver a previsão hora a hora |
 
@@ -38,8 +41,7 @@ Escura, limpa, toda em português, com monitoramento do sistema, mídia, clima e
 
 | | Widget | O que faz |
 |---|---|---|
-| ✨ | **Claude Usage** | Uso dos limites do Claude Code (opcional) |
-| 🌐 | **Rede** | Velocidade de download e upload |
+| 🌐 | **Rede** | Velocidade de download e upload, com largura fixa para não empurrar os outros widgets |
 | 💽 | **Disco** | Uso do disco C:; clique para ver todos os discos |
 | 🧠 | **CPU / Memória / GPU** | Uso do processador, da RAM e da placa de vídeo, com gráficos ao clicar |
 | 🔊 | **Volume** | Volume geral e por aplicativo |
@@ -140,8 +142,19 @@ Abra os arquivos com qualquer editor de texto (o Bloco de Notas serve; o [VS Cod
 
 ### Seus aplicativos
 
-No `config.yaml`, procure por `app_list:` e troque os caminhos pelos programas instalados no seu PC.
-Para achar o caminho, clique com o botão direito no atalho do programa → **Abrir local do arquivo**.
+A barra já vem com quatro atalhos que funcionam em qualquer Windows. Para colocar os seus programas, abra o `config.yaml` e procure por `app_list:`. Cada linha é um botão:
+
+```yaml
+app_list:
+  - {icon: "\udb80\ude4b", launch: "explorer.exe"}  # Explorador de Arquivos
+  - {icon: "\udb82\udc2e", launch: "notepad.exe"}   # Bloco de Notas
+  - {icon: "\udb80\udfd8", launch: "mspaint.exe"}   # Paint
+  - {icon: "\udb80\udcec", launch: "calc.exe"}      # Calculadora
+```
+
+- **`launch`**: o caminho do programa. Para achar, clique com o botão direito no atalho do programa → **Abrir local do arquivo**, e copie o caminho do `.exe` trocando `\` por `/`. Exemplo: `"C:/Program Files (x86)/Steam/steam.exe"`.
+- **`icon`**: o ícone, escrito como código. Procure um no [site do Nerd Fonts](https://www.nerdfonts.com/cheat-sheet). Para ícones de código curto (4 dígitos, ex.: `f1b6`), escreva `"\uf1b6"`. Os de 5 dígitos (`f0a1e` e parecidos) precisam de dois códigos; veja como em [Trocar ícones](docs/personalizacao.md#trocar-ícones).
+- Quer menos ou mais botões? Apague ou copie uma linha, mantendo os mesmos espaços no começo.
 
 ### Suas pastas
 
@@ -156,7 +169,20 @@ No `config.yaml`, em `widgets:` (dentro de `bars:`), cada widget é uma linha. C
 #"wallpapers",  # desligado
 ```
 
+Não usa o Claude Code? Coloque um `#` na frente de `"claude_usage",`, na lista do centro.
+
 Mais personalizações (cores, ícones, monitor, posição) estão em [docs/personalizacao.md](docs/personalizacao.md).
+
+---
+
+## Atualizando de uma versão anterior
+
+1. Faça uma cópia da sua pasta `%USERPROFILE%\.config\yasb`.
+2. Copie o `config.yaml` e o `styles.css` novos por cima dos antigos. **Não** substitua o seu `.env`: ele guarda a sua chave do clima e as suas pastas.
+3. Refaça os ajustes que você tinha feito (cidade, apps, widgets ligados).
+4. Rode `yasbc reload`.
+
+> 💡 Usa um `config.yaml` antigo, seu? No YASB v2.0.8 ou mais novo, o comando `yasbc migrate-config` mostra as opções que não existem mais e se oferece para removê-las. Antes de gravar, ele pede confirmação e salva uma cópia em `config.yaml.bak`.
 
 ---
 

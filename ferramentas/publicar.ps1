@@ -12,8 +12,12 @@
    1. Copia config.yaml e styles.css da sua pasta do YASB para o repositório.
    2. Troca valores pessoais por valores genéricos (ex.: nome do seu monitor
       vira '*', que significa "todas as telas"). A lista fica em $Substituicoes.
+      Os atalhos do widget "apps" viram programas que vêm em qualquer Windows
+      (lista em $AppsGenericos). O seu config.yaml local não é alterado.
    3. TRAVA DE SEGURANÇA: lê o seu .env e cancela tudo se algum valor dele
       (chave de API, senha, caminho pessoal) aparecer nos arquivos copiados.
+      Também cancela se o caminho da sua pasta de usuário (C:\Users\<você>)
+      aparecer.
    4. Avisa se o config.yaml usa alguma variável $env:NOME que não está
       documentada no .env.example.
    5. Mostra o que mudou. Se você passar -Mensagem, também faz commit e push.
@@ -48,6 +52,18 @@ $Substituicoes = @(
     # @{ De = 'location: "Joinville"'; Para = 'location: "Sao Paulo"'; Motivo = "cidade do clima" }
 )
 
+# -----------------------------------------------------------------------------
+# Atalhos publicados no widget "apps". A lista inteira do seu config.yaml é
+# trocada por estes programas, que vêm em qualquer Windows 10/11. Ícones são
+# Nerd Font (Material Design), escritos como escapes \uXXXX.
+# -----------------------------------------------------------------------------
+$AppsGenericos = @(
+    '        - {icon: "\udb80\ude4b", launch: "explorer.exe"}  # Explorador de Arquivos'
+    '        - {icon: "\udb82\udc2e", launch: "notepad.exe"}   # Bloco de Notas'
+    '        - {icon: "\udb80\udfd8", launch: "mspaint.exe"}   # Paint'
+    '        - {icon: "\udb80\udcec", launch: "calc.exe"}      # Calculadora'
+)
+
 # Variáveis que já existem em todo Windows (não precisam estar no .env.example).
 $VariaveisDoWindows = @("APPDATA", "LOCALAPPDATA", "TEMP", "TMP", "USERPROFILE",
                         "PROGRAMFILES", "PROGRAMDATA", "SYSTEMROOT", "WINDIR", "USERNAME")
@@ -77,6 +93,17 @@ foreach ($s in $Substituicoes) {
     }
 }
 
+# --- 2b. Atalhos de apps genéricos -------------------------------------------
+Passo "Trocando os atalhos de apps por programas genéricos"
+$quebra = if ($config.Contains("`r`n")) { "`r`n" } else { "`n" }
+# Pega a linha "app_list:", os comentários logo abaixo e todos os itens "- {icon: ...}".
+$padraoApps = '(?m)(^ {6}app_list:[^\r\n]*\r?\n(?:^ {8}#[^\r\n]*\r?\n)*)(?:^ {8}- \{icon:[^\r\n]*\r?\n)+'
+$achados = [regex]::Matches($config, $padraoApps).Count
+if ($achados -ne 1) { Falha "esperava 1 lista app_list no config.yaml e achei $achados. Nada foi publicado." }
+$novaLista = ($AppsGenericos -join $quebra) + $quebra
+$config = [regex]::Replace($config, $padraoApps, { param($m) $m.Groups[1].Value + $novaLista })
+Write-Host "  ok  $($AppsGenericos.Count) atalhos genéricos no lugar dos seus"
+
 # --- 3. Trava de segurança contra vazamento ----------------------------------
 Passo "Verificando se algum valor do seu .env vazaria"
 $envLocal = Join-Path $Origem ".env"
@@ -98,6 +125,17 @@ if (Test-Path $envLocal) {
 } else {
     Write-Host "  --  sem .env na origem, verificação pulada"
 }
+
+# Caminho da pasta do usuário (C:\Users\<você>), com barra normal ou invertida.
+$perfil = $env:USERPROFILE
+foreach ($forma in @($perfil, $perfil.Replace('\', '/'))) {
+    foreach ($texto in @($config, $estilos)) {
+        if ($texto.IndexOf($forma, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+            Falha "o caminho da sua pasta de usuário ($forma) aparece nos arquivos. Troque por um genérico em `$Substituicoes. Nada foi publicado."
+        }
+    }
+}
+Write-Host "  ok  nenhum caminho da sua pasta de usuário nos arquivos"
 
 # --- 4. Variáveis $env: documentadas? ----------------------------------------
 Passo "Conferindo variáveis `$env: usadas no config.yaml"

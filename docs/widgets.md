@@ -27,9 +27,9 @@ widgets:
 | `media` | esq. | Menu do player | Alterna o texto | Play/pause | Nada |
 | `audio_visualizer` | esq. | — | — | — | Nada |
 | `apps` | esq. | Abre o programa | — | — | Caminhos dos **seus** programas em `app_list` |
+| `claude_usage` | centro | Popup de uso | — | 5 horas ↔ 7 dias | [Claude Code](https://claude.com/claude-code) instalado e logado |
 | `clock` | centro | Calendário | Próximo fuso horário | Alterna o texto | Nada |
 | `weather` | centro | Previsão detalhada | — | Alterna o texto | `WEATHERAPI_KEY` no `.env` e sua cidade em `location` |
-| `claude_usage` | dir. | Popup de uso | — | 5 horas ↔ 7 dias | [Claude Code](https://claude.com/claude-code) instalado e logado |
 | `traffic` | dir. | Menu de rede | — | Alterna o texto | Nada |
 | `disk` | dir. | Todos os discos | Alterna o texto | Abre o C: no Explorer | Nada (edite as letras em `volume_labels`) |
 | `cpu` | dir. | Gráfico de uso | Gerenciador de Tarefas | Alterna o texto | Nada |
@@ -39,7 +39,7 @@ widgets:
 | `control_center` | dir. | Central de controle | — | — | Nada |
 | `power_menu` | dir. | Reiniciar / Desligar | — | — | Nada |
 
-> **Não usa Claude Code?** Apague a linha `"claude_usage",` da lista do lado direito.
+> **Não usa Claude Code?** Apague a linha `"claude_usage",` da lista do centro (`center`).
 
 ---
 

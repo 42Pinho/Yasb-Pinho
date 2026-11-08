@@ -104,6 +104,7 @@ bars:
         [
          #"notes",          # Notas rápidas
          #"todo",           # Lista de tarefas
+         "claude_usage",    # Uso dos limites do Claude Code
          "clock",           # Relógio e calendário
          "weather",         # Previsão do tempo
          #"update_check",   # Exibe atualizaçoes pendentes de apps e do Windows
@@ -113,8 +114,7 @@ bars:
         ]
       right:  # Widgets alinhados à direita
         [
-          "claude_usage",           # Uso dos limites do Claude Code
-          "traffic",                # Monitor de tráfego de rede
+          "traffic",               # Monitor de tráfego de rede
           "disk",                   # Monitor de uso de disco
           "cpu",                   # Monitor de uso da CPU
           "memory",                # Monitor de uso da memória RAM
@@ -213,9 +213,10 @@ widgets:
       app_list:  # Lista de atalhos
         # Formato: {icon: "ícone", launch: "comando ou ação"}
         # Ações especiais: "quick_settings", "notification_center", "search", "widget", "launcher"
-        - {icon: "\udb82\ude1c", launch: "C:/Program Files/Blackmagic Design/DaVinci Resolve/Resolve.exe"}  # Da vinci Resolve
-        - {icon: "\uf4e5", launch: "C:/Users/Pinho/AppData/Local/Programs/crushee-desktop/Crushee.exe"}  # Crushee
-        - {icon: "\uf1b6", launch: "C:/Program Files (x86)/Steam/steam.exe"}  # Steam
+        - {icon: "\udb80\ude4b", launch: "explorer.exe"}  # Explorador de Arquivos
+        - {icon: "\udb82\udc2e", launch: "notepad.exe"}   # Bloco de Notas
+        - {icon: "\udb80\udfd8", launch: "mspaint.exe"}   # Paint
+        - {icon: "\udb80\udcec", launch: "calc.exe"}      # Calculadora
 
   # --- AUDIO VISUALIZER WIDGET ---
   # Visualizador de áudio nativo (WASAPI), sem depender do Cava. Cor no styles.css (seção 26).
