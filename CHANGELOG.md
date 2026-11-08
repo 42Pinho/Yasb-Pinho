@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.1 (novembro de 2026)
+
+### Corrigido
+- **Central de controle sem hover e sem mostrar o que estava ligado.** O estilo usava `transition`, e o motor de animação do YASB v2.0.7 trava o hover e a troca de estado dos botões quando ela está presente. Os estilos foram refeitos sem `transition`, seguindo a estrutura oficial do widget. Agora:
+  - os botões reagem ao mouse;
+  - "Não perturbe", "Mudo" e "Microfone" ficam azuis na hora em que são ligados.
+- Removida a regra genérica de `transition` dos botões de todos os menus, pelo mesmo motivo.
+- Menus suspensos da central (escolha de dispositivo e plano de energia) agora seguem o tema escuro.
+
 ## v2.0 (novembro de 2026)
 
 Atualização completa para o **YASB v2.0.7**.

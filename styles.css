@@ -293,28 +293,6 @@ QWidget {
   font-family: var(--font-ui);
 }
 
-.button,
-.btn,
-.settings-button,
-.refresh-icon,
-.reset-button,
-.add-button,
-.cancel-button,
-.copy-button,
-.delete-button,
-.connect,
-.tab-buttons,
-.grouper-button,
-.float-button,
-.close-button,
-.pin-btn,
-.toggle-apps {
-  transition:
-    background-color var(--transition-mid),
-    border-color var(--transition-mid),
-    color var(--transition-mid);
-}
-
 /* ===========================================================================
    6. WIDGETS BÁSICOS DE BARRA
    =========================================================================== */
@@ -3296,14 +3274,33 @@ QWidget {
   font-size: 16px;
 }
 
-/* --- Control Center: popup --- */
+/* --- Control Center: popup ---
+   Baseado no CSS oficial do YASB. Dois cuidados importantes:
+   1. O "botão" visível das ações rápidas é o .icon (um QLabel), não o
+      .button em volta dele. Hover e estado ativo vão no .icon.
+   2. NÃO use "transition" aqui (nem em regras genéricas como ".button").
+      No YASB v2.0.7, o motor de animação (qt-css-engine) assume o controle
+      do elemento e trava o hover e o ligar/desligar. Sem transition, tudo
+      funciona pelo próprio Qt, só que sem a animação suave.
+      Testado em 08/11/2026: hover em todos os botões e Não perturbe ligando
+      e desligando na hora. */
 .control-center-menu {
   min-width: 340px;
-  padding: 8px;
 }
 
-/* Ícones das ações, sliders e mídia são glifos da Segoe Fluent Icons */
-.control-center-menu .icon,
+.control-center-menu .section {
+  margin: 0;
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--border-1);
+  background: transparent;
+}
+
+/* Fontes: ícones são glifos da Segoe Fluent Icons; textos em Segoe UI */
+.control-center-menu .section.quick-actions .button .icon,
+.control-center-menu .section.sliders .slider .icon,
+.control-center-menu .section.sliders .slider .source-selector,
+.control-center-menu .section.power .plan-name .icon,
+.control-center-menu .section.power .mode-name .icon,
 .control-center-menu .section.media .button {
   font-family: var(--font-icons);
   font-weight: 400;
@@ -3316,60 +3313,98 @@ QWidget {
   font-family: var(--font-ui);
 }
 
-.control-center-menu .section {
-  padding: 6px;
+/* Estado desabilitado (ex.: microfone ausente) */
+.control-center-menu .section.quick-actions .button.disabled .icon,
+.control-center-menu .section.quick-actions .button.disabled .title,
+.control-center-menu .section.sliders .slider.disabled,
+.control-center-menu .section.media .button.disabled {
+  opacity: 0.5;
 }
 
+/* --- Ações rápidas --- */
 .control-center-menu .section.quick-actions .button {
-  min-height: 64px;
-  margin: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-10);
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.control-center-menu .section.quick-actions .button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.control-center-menu .section.quick-actions .button.active {
-  border-color: var(--blue);
-  background-color: rgba(136, 184, 255, 0.25);
+  margin: 0 4px;
+  cursor: pointer;
 }
 
 .control-center-menu .section.quick-actions .button .icon {
+  min-height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-8);
+  background-color: rgba(255, 255, 255, 0.06);
   color: var(--text1);
   font-size: 16px;
 }
 
+.control-center-menu .section.quick-actions .button .icon:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.control-center-menu .section.quick-actions .button .icon:pressed {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Ligado: tile azul com ícone escuro */
+.control-center-menu .section.quick-actions .button.active .icon {
+  border-color: var(--blue);
+  background-color: var(--blue);
+  color: var(--bg-color1);
+}
+
+.control-center-menu .section.quick-actions .button.active .icon:hover {
+  border-color: #a3c9ff;
+  background-color: #a3c9ff;
+  color: var(--bg-color1);
+}
+
+.control-center-menu .section.quick-actions .button.active .icon:pressed {
+  border-color: var(--blue-strong);
+  background-color: var(--blue-strong);
+}
+
+.control-center-menu .section.quick-actions .button.disabled .icon:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
 .control-center-menu .section.quick-actions .button .title {
+  margin: 6px 0 8px 0;
+  padding: 0;
   color: var(--text2);
   font-size: 11px;
+  font-weight: 600;
 }
 
-.control-center-menu .section.quick-actions .button.active .icon,
 .control-center-menu .section.quick-actions .button.active .title {
-  color: var(--white);
+  color: var(--text1);
 }
 
+/* --- Sliders (volume, microfone) --- */
 .control-center-menu .section.sliders .slider {
-  padding: 4px 6px;
+  min-height: 34px;
+  margin: 0 4px;
+  border: none;
+  background: transparent;
 }
 
 .control-center-menu .section.sliders .slider .icon {
+  min-width: 36px;
   color: var(--text1);
   font-size: 16px;
 }
 
 .control-center-menu .section.sliders .slider .value {
-  color: var(--text3);
+  min-width: 36px;
+  color: var(--text2);
   font-size: 12px;
+  font-weight: 600;
 }
 
 .control-center-menu .section.sliders .slider .slider-control::groove {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .control-center-menu .section.sliders .slider .slider-control::sub-page {
@@ -3385,61 +3420,148 @@ QWidget {
   background: var(--white);
 }
 
+.control-center-menu .section.sliders .slider .slider-control::handle:hover {
+  background: var(--blue);
+}
+
 .control-center-menu .section.sliders .slider .source-selector {
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
   border: none;
-  border-radius: var(--radius-4);
-  background: transparent;
+  border-radius: var(--radius-6);
+  background-color: rgba(255, 255, 255, 0);
   color: var(--text3);
-}
-
-.control-center-menu .section.sliders .slider .source-selector:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.control-center-menu .section.power .button {
-  margin: 4px;
-  padding: 8px;
-  border-radius: var(--radius-8);
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.control-center-menu .section.power .button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.control-center-menu .section.power .button .title {
-  color: var(--text1);
   font-size: 12px;
 }
 
-.control-center-menu .section.power .button .subtext {
+.control-center-menu .section.sliders .slider .source-selector:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--text1);
+}
+
+/* --- Plano e modo de energia --- */
+.control-center-menu .section.power .plan-name,
+.control-center-menu .section.power .mode-name {
+  min-height: 36px;
+  margin: 0 4px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-8);
+  background-color: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.control-center-menu .section.power .plan-name:hover,
+.control-center-menu .section.power .mode-name:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.control-center-menu .section.power .mode-name.disabled,
+.control-center-menu .section.power .mode-name.disabled:hover {
+  opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.control-center-menu .section.power .plan-name .title,
+.control-center-menu .section.power .mode-name .title {
   color: var(--text3);
   font-size: 11px;
+  font-weight: 600;
+}
+
+.control-center-menu .section.power .plan-name .subtext,
+.control-center-menu .section.power .mode-name .subtext {
+  color: var(--text1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.control-center-menu .section.power .plan-name .icon,
+.control-center-menu .section.power .mode-name .icon {
+  color: var(--text3);
+  font-size: 14px;
+}
+
+/* --- Mídia --- */
+.control-center-menu .section.media {
+  padding: 12px;
+  border-bottom: none;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.control-center-menu .section.media .track-info {
+  padding-left: 8px;
 }
 
 .control-center-menu .section.media .title {
   color: var(--text1);
   font-size: 13px;
+  font-weight: 600;
 }
 
 .control-center-menu .section.media .subtext {
   color: var(--text3);
   font-size: 12px;
+  font-weight: 600;
 }
 
 .control-center-menu .section.media .button {
   min-width: 32px;
+  max-width: 32px;
   min-height: 32px;
-  border-radius: 16px;
-  background: transparent;
+  max-height: 32px;
+  margin: 0 0 0 4px;
+  border-radius: var(--radius-6);
+  background-color: rgba(255, 255, 255, 0);
   color: var(--text1);
   font-size: 14px;
 }
 
 .control-center-menu .section.media .button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
-.control-center-menu .section.media .button.disabled {
-  color: var(--text4);
+.control-center-menu .section.media .button.disabled,
+.control-center-menu .section.media .button.disabled:hover {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+/* --- Menus suspensos (escolha de dispositivo e plano de energia) --- */
+.control-center-menu .context-menu {
+  padding: 4px 0;
+  background-color: rgba(37, 38, 43, 0.95);
+  color: var(--text1);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.control-center-menu .context-menu::item {
+  min-width: 100px;
+  margin: 2px 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-4);
+  background-color: transparent;
+}
+
+.control-center-menu .context-menu::item:selected {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+}
+
+.control-center-menu .context-menu::indicator:unchecked {
+  width: 4px;
+  height: 12px;
+  margin-left: 0;
+  background-color: transparent;
+}
+
+.control-center-menu .context-menu::indicator:checked {
+  width: 4px;
+  height: 12px;
+  margin-left: 0;
+  border-radius: 2px;
+  background-color: var(--blue);
 }
