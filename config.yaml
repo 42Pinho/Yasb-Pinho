@@ -6,7 +6,7 @@
 # =====================================================================
 #
 #  REQUISITOS
-#    - YASB v2.0.7 ou mais novo ...... winget install amn.yasb
+#    - YASB v2.0.8 ou mais novo ...... winget install amn.yasb
 #    - Fonte JetBrainsMono Nerd Font .. winget install DEVCOM.JetBrainsMonoNerdFont
 #    - Fonte Segoe Fluent Icons ....... já vem no Windows 11 (no Windows 10, instale à parte)
 #    - Arquivo .env nesta mesma pasta (renomeie o .env.example para .env)
@@ -1642,6 +1642,11 @@ widgets:
       label: "\uEB01 \uEAB4 {download_speed} | \uEAB7 {upload_speed}"
       label_alt: "Download {download_speed} | Upload {upload_speed}"
       update_interval: 1000  # Atualização em ms
+      # Largura fixa: completa cada velocidade com espaços até 10 caracteres
+      # ("999.9 Mbps"). Com a fonte monoespaçada, o widget não muda de tamanho
+      # e não empurra os vizinhos na barra.
+      max_label_length: 10
+      max_label_length_align: "right"
       menu:
         blur: true
         round_corners: true

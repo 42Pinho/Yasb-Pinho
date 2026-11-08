@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.2 (novembro de 2026)
+
+### Atualizado para o YASB v2.0.8
+- Testado no YASB v2.0.8 sem erros nem avisos no log. Nenhuma opção dos widgets ativos mudou.
+- O v2.0.8 traz o comando `yasbc migrate-config`, que encontra e remove opções antigas do `config.yaml`. Antes de gravar, ele mostra a lista, pede confirmação e salva uma cópia em `config.yaml.bak`.
+
+### Corrigido
+- **Monitor de rede empurrava os outros widgets.** A largura do `traffic` mudava junto com o número de caracteres da velocidade (por exemplo, `0 Kbps` e `125.3 Mbps`). Agora cada velocidade é completada com espaços até 10 caracteres (`max_label_length: 10`, alinhada à direita), e o widget tem largura fixa.
+
 ## v2.0.1 (novembro de 2026)
 
 ### Corrigido

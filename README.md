@@ -53,7 +53,7 @@ A lista completa, com o que cada widget precisa e como ligar os que vêm desliga
 ## O que você precisa
 
 - **Windows 10 ou 11**
-- **YASB v2.0.7 ou mais novo**
+- **YASB v2.0.8 ou mais novo**
 - **Fonte JetBrainsMono Nerd Font** (desenha os ícones da barra)
 - **Fonte Segoe Fluent Icons**: já vem no Windows 11. No Windows 10, baixe no [site da Microsoft](https://learn.microsoft.com/pt-br/windows/apps/design/style/segoe-fluent-icons-font).
 

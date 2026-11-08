@@ -3283,7 +3283,8 @@ QWidget {
       do elemento e trava o hover e o ligar/desligar. Sem transition, tudo
       funciona pelo próprio Qt, só que sem a animação suave.
       Testado em 08/11/2026: hover em todos os botões e Não perturbe ligando
-      e desligando na hora. */
+      e desligando na hora. O v2.0.8 traz correções de transition no motor,
+      mas isso ainda não foi testado de novo: mantenha sem transition. */
 .control-center-menu {
   min-width: 340px;
 }

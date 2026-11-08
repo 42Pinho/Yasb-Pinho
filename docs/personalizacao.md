@@ -72,7 +72,7 @@ O YASB não é um navegador. Algumas coisas comuns em CSS **não funcionam** e s
 | `color-mix(in srgb, var(--blue) 30%, transparent)` | `rgba(136, 184, 255, 0.3)` |
 | `calc(...)` | O valor já calculado |
 | `@media (...)` | — |
-| `transition: ...` (animação suave) | Não use no YASB v2.0.7: ela trava o hover e o ligar/desligar dos botões nos menus |
+| `transition: ...` (animação suave) | Não use: no YASB v2.0.7 ela trava o hover e o ligar/desligar dos botões nos menus (o v2.0.8 ainda não foi testado) |
 
 Funcionam: `var(--nome)`, `rgba()`, `#RRGGBB`, `#RRGGBBAA`, `linear-gradient()`, `text-shadow`, `box-shadow`, `@import`.
 
